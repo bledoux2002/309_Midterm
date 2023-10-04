@@ -1229,6 +1229,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 303670441478350932, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
+      propertyPath: elementVisibility
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: followSource
       value: 
@@ -1268,7 +1272,7 @@ PrefabInstance:
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Exited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: 9fb052fce33d11343ab980d068fd064f, type: 3}
+      objectReference: {fileID: 361164286}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Selected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -1299,7 +1303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Exited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: TargetClicked
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Entered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1323,7 +1327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Exited.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TMPro.Fitts.Target, Assembly-CSharp
+      value: TMPro.Fitts.GridTargets, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: Entered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1396,6 +1400,14 @@ PrefabInstance:
     - target: {fileID: 4333620153645678103, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
       propertyPath: m_Name
       value: Indicators.ObjectPointers.Straight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399980076619467793, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
+      propertyPath: elementVisibility
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201054935352871865, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
+      propertyPath: elementVisibility
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

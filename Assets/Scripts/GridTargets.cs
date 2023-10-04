@@ -120,7 +120,7 @@ namespace TMPro.Fitts
         // call back for select event from the controller
         public void TargetClicked()
         {
-            Debug.Log("Target selected.");
+            Debug.Log("Target selected at " + transform.position);
 
             // test: play some effect sound
             AudioSource.PlayClipAtPoint(_aClip, transform.position);
@@ -145,23 +145,7 @@ namespace TMPro.Fitts
             //update accuracy
             _statClicked++;
 
-            float x;
-            float y;
-            if (transform.localPosition == new Vector3(0f, 2.5f, 10f))
-            {
-                // move the target to new location
-                // i.e. range between (-8, 0, 10) to (8, 4, 10)
-                x = Random.Range(-10f, 10f);
-                y = Random.Range(0f, 5f);
-
-                _elapsedTime = 0f;
-            }
-            else
-            {
-                x = 0f;
-                y = 2.5f;
-            }
-            transform.localPosition = new Vector3(x, y, 10f);
+           
 
             // increment trial count
             _statTotalClicks++;
