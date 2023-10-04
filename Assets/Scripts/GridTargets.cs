@@ -11,6 +11,8 @@ namespace TMPro.Fitts
         public GameObject _targetPrefab;
         GameObject[,] _grid;
         int _activeTargets;
+        int _activeX;
+        int _activeY;
 
         // audio clip 
         public AudioClip _aClip;
@@ -91,13 +93,14 @@ namespace TMPro.Fitts
         {
             _testBegun = true;
             // randomly activate 3 spheres
-            while (_activeTargets < 3)
+            
+            while (_activeTargets < 1)
             {
-                int x = Random.Range(0, 5);
-                int y = Random.Range(0, 5);
-                if (_grid[x, y].activeSelf == false)
+                _activeX = Random.Range(0, 5);
+                _activeY = Random.Range(0, 5);
+                if (_grid[_activeX, _activeY].activeSelf == false)
                 {
-                    _grid[x, y].SetActive(true);
+                    _grid[_activeX, _activeY].SetActive(true);
                     _activeTargets++;
                 }
             }
@@ -120,7 +123,7 @@ namespace TMPro.Fitts
         // call back for select event from the controller
         public void TargetClicked()
         {
-            Debug.Log("Target selected at " + transform.position);
+            Debug.Log("Target selected");
 
             // test: play some effect sound
             AudioSource.PlayClipAtPoint(_aClip, transform.position);
@@ -145,7 +148,32 @@ namespace TMPro.Fitts
             //update accuracy
             _statClicked++;
 
-           
+            _activeTargets = 0;
+
+            while (_activeTargets < 1)
+            {
+                int x = Random.Range(0, 5);
+                int y = Random.Range(0, 5);
+                if (_grid[x, y].activeSelf == false)
+                {
+                    //deactivaete previous target
+                    for (int i = 0; i < 5; i++)
+                    {
+                        for (int j = 0; j < 5; j++)
+                        {
+                            if (_grid[i, j].activeSelf == true)
+                            {
+                                _grid[i, j].SetActive(false);
+                            }
+                        }
+                    }
+
+                    _activeX = x;
+                    _activeY = y;
+                    _grid[_activeX, _activeY].SetActive(true);
+                    _activeTargets++;
+                }
+            }
 
             // increment trial count
             _statTotalClicks++;
