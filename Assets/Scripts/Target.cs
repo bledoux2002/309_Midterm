@@ -16,8 +16,6 @@ namespace TMPro.Fitts
         // var: elapsed time
        float _elapsedTime;
 
-        // var: total trials to run and current trial number
-//        public int trials = 50;
         int _statClicked = 0;
         int _statTotalCount = 0;
         float _statTotalTime = 0.0f;
