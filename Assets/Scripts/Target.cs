@@ -84,7 +84,7 @@ namespace TMPro.Fitts
 //            _prevPosition = transform.localPosition;
 
             // zero elapsed time
-//            _elapsedTime = 0.0f;
+            _elapsedTime = 0.0f;
             _statClicked = 0;
 //            _statTotalDistance = 0f;
             _statTotalTime = 0f;

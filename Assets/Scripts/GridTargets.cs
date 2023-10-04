@@ -10,11 +10,13 @@ namespace TMPro.Fitts
         // grid
         public GameObject _targetPrefab;
         GameObject[,] _grid;
+        int _activeTargets;
 
         // audio clip 
         public AudioClip _aClip;
 
         // var: elapsed time
+        bool _testBegun;
         float _elapsedTime;
 
         int _statClicked = 0;
@@ -32,6 +34,10 @@ namespace TMPro.Fitts
         {
             // zero elapsed time
             _elapsedTime = 0.0f;
+            _testBegun = false;
+
+            _grid = new GameObject[5, 5];
+            _activeTargets = 0;
 
             //find (or isntantiate) all spheres in scene
             for (int i = 0; i < 5; i++)
@@ -40,9 +46,10 @@ namespace TMPro.Fitts
 
                 for (int j = 0; j < 5; j++)
                 {
-                    float y = (1.25f * j) - 2.5f;
+                    float y = 6.25f - (1.25f * j);
 
-                    Instantiate(_targetPrefab, new Vector3(x, y, 10f), Quaternion.identity);
+                    _grid[i, j] = Instantiate(_targetPrefab, new Vector3(x, y, 10f), Quaternion.identity);
+                    _grid[i, j].SetActive(false);
                 }
             }
         }
@@ -51,12 +58,15 @@ namespace TMPro.Fitts
         void Update()
         {
             // update elapsed time
-            _elapsedTime += Time.deltaTime;
-            _statTotalTime += Time.deltaTime;
-            _statAccuracy = (100.0f * _statClicked) / _statTotalClicks;
-            _statUI.text = "Time Elapsed: " + (_statTotalTime).ToString() + "\n" +
-                    "Accuracy: " + (_statAccuracy).ToString() + "\n" +
-                    "Spheres Clicked: " + (_statClicked).ToString();
+            if (_testBegun)
+            {
+                _elapsedTime += Time.deltaTime;
+                _statTotalTime += Time.deltaTime;
+                _statAccuracy = (100.0f * _statClicked) / _statTotalClicks;
+                _statUI.text = "Time Elapsed: " + (_statTotalTime).ToString() + "\n" +
+                        "Accuracy: " + (_statAccuracy).ToString() + "\n" +
+                        "Spheres Clicked: " + (_statClicked).ToString();
+            }
 
             if (_statTotalTime > 10.0f)
             {
@@ -72,23 +82,37 @@ namespace TMPro.Fitts
                 _startUI.SetActive(true);
 
                 // need to stop the test
+                _testBegun = false;
                 return;
             }
         }
 
         public void StartTest()
         {
-            gameObject.SetActive(true);
+            _testBegun = true;
+            // randomly activate 3 spheres
+            while (_activeTargets < 3)
+            {
+                int x = Random.Range(0, 5);
+                int y = Random.Range(0, 5);
+                if (_grid[x, y].activeSelf == false)
+                {
+                    _grid[x, y].SetActive(true);
+                    _activeTargets++;
+                }
+            }
 
             // initialize the prev position with the current
             //            _prevPosition = transform.localPosition;
 
             // zero elapsed time
-            //            _elapsedTime = 0.0f;
+            _elapsedTime = 0.0f;
             _statClicked = 0;
             //            _statTotalDistance = 0f;
             _statTotalTime = 0f;
             _statTotalClicks = 0;
+
+
 
             Debug.Log("Test started.");
         }
