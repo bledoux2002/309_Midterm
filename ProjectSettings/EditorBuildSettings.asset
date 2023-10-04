@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SPIDERSHOT.unity
+    guid: e02d529dc7c64174bbd134c688cfb00a
+  - enabled: 1
+    path: Assets/Scenes/GRIDSHOT.unity
+    guid: ea09a19f161aea74890270fc087be1b5
+  - enabled: 1
+    path: Assets/Scenes/STRAFETRACK.unity
+    guid: ecf32affeb0d2c44cb9736f72654be24
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e93bce662c6ec6b40a992e20625ce3e2, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 49d31c82a0a2e5e4a80e37959e4a34bc, type: 2}
