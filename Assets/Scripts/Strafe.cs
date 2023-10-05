@@ -61,7 +61,7 @@ namespace TMPro.Fitts
             if (_beingTracked)
             {
                 _statTrackedTime += Time.deltaTime;
-                _health = _health - 0.001f;
+                _health = _health - 0.1f;
 
                 if (_health <= 0f)
                 {
