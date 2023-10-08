@@ -10,7 +10,7 @@ namespace TMPro.Fitts
     public class Strafe : MonoBehaviour
     {
         // audio clip 
-        public AudioClip _aClip;
+        //public AudioClip _aClip;
 
         // var: elapsed time
         float _elapsedTime;
@@ -19,6 +19,7 @@ namespace TMPro.Fitts
         float _health;
 
         bool _beingTracked;
+        bool _ptrActive;
         int changeDir;
         float _statTrackedTime = 0;
         int _statTotalCount = 0;
@@ -29,7 +30,7 @@ namespace TMPro.Fitts
         // related UI
         //public Text _statUI;
         public TextMeshProUGUI _statUI;
-        public GameObject _startUI;
+        public GameObject[] _startUI;
 
         // Start is called before the first frame update
         void Start()
@@ -56,12 +57,16 @@ namespace TMPro.Fitts
             transform.position = new Vector3(transform.position.x + (0.1f * changeDir), 2.5f, 10f);
 
             // update elapsed time
-            _elapsedTime += Time.deltaTime;
+            if (_ptrActive)
+            {
+                _elapsedTime += Time.deltaTime;
+            }
             _statTotalTime += Time.deltaTime;
             if (_beingTracked)
             {
+                Debug.Log("Tracking");
                 _statTrackedTime += Time.deltaTime;
-                _health = _health - 0.1f;
+                _health = _health - 1f;
 
                 if (_health <= 0f)
                 {
@@ -72,9 +77,9 @@ namespace TMPro.Fitts
                     _statTotalCount++;
                 }
 
-                _beingTracked = false;
+                //_beingTracked = false;
             }
-            _statAccuracy = (100.0f * _statTrackedTime) / _statTotalTime;
+            _statAccuracy = (100.0f * _statTrackedTime) / _elapsedTime;
             _statUI.text = "Time Elapsed: " + (_statTotalTime).ToString() + "\n" +
                     "Accuracy: " + (_statAccuracy).ToString() + "\n" +
                     "Targets Tracked: " + (_statTotalCount).ToString() + "\n" +
@@ -91,7 +96,10 @@ namespace TMPro.Fitts
                 //                   "avg time: " + (_statTotalTime / trials).ToString();
 
                 gameObject.SetActive(false);
-                _startUI.SetActive(true);
+                for (int i = 0; i < _startUI.Length; i++)
+                {
+                    _startUI[i].SetActive(true);
+                }
                 transform.localPosition = new Vector3(0f, 2.5f, 10f);
 
                 // need to stop the test
@@ -119,10 +127,10 @@ namespace TMPro.Fitts
         // call back for select event from the controller
         public void TargetClicked()
         {
-            Debug.Log("Target selected.");
+            //Debug.Log("Target selected.");
 
             // test: play some effect sound
-            AudioSource.PlayClipAtPoint(_aClip, transform.position);
+            //AudioSource.PlayClipAtPoint(_aClip, transform.position);
 
             // compute distance from the prev to current
             //            float dist = Vector3.Distance(_prevPosition, transform.localPosition);
@@ -143,6 +151,22 @@ namespace TMPro.Fitts
 
             //update accuracy
             _beingTracked = true;
+        }
+
+        public void MissTarget()
+        {
+            //Debug.Log("NUH UH");
+            _beingTracked = false;
+        }
+
+        public void PointerActive()
+        {
+            _ptrActive = true;
+        }
+
+        public void PointerDeactive()
+        {
+            _ptrActive = false;
         }
     }
 }

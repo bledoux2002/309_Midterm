@@ -21,15 +21,16 @@ namespace TMPro.Fitts
         bool _testBegun;
         float _elapsedTime;
 
-        int _statClicked = 0;
-        int _statTotalClicks = 0;
-        float _statTotalTime = 0.0f;
-        float _statAccuracy = 0.0f;
+        int _statClicked;
+        int _statTotalCount;
+        int _statTotalClicks;
+        float _statTotalTime;
+        float _statAccuracy;
 
         // related UI
         //public Text _statUI;
         public TextMeshProUGUI _statUI;
-        public GameObject _startUI;
+        public GameObject[] _startUI;
 
         // Start is called before the first frame update
         void Start()
@@ -74,14 +75,28 @@ namespace TMPro.Fitts
             {
                 Debug.Log("Test completed.");
 
+                /* only for multiple active targets
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        _grid[i, j].SetActive(false);
+                    }
+                }*/
+
+                _grid[_activeX, _activeY].SetActive(false);
+
                 _statUI.text = "Accuracy: " + (_statAccuracy).ToString() + "\n" +
                     "Spheres Clicked: " + (_statClicked).ToString() + "\n" +
-                    "Total Spheres: " + (_statTotalClicks).ToString();
+                    "Total Spheres: " + (_statTotalCount).ToString();
                 //                    "avg distance: " + (_statTotalDistance / trials).ToString() + "\n" +
                 //                   "avg time: " + (_statTotalTime / trials).ToString();
 
                 //gameObject.SetActive(false);
-                _startUI.SetActive(true);
+                for (int i = 0; i < _startUI.Length; i++)
+                {
+                    _startUI[i].SetActive(true);
+                }
 
                 // need to stop the test
                 _testBegun = false;
@@ -113,6 +128,7 @@ namespace TMPro.Fitts
             _statClicked = 0;
             //            _statTotalDistance = 0f;
             _statTotalTime = 0f;
+            _statTotalCount = 0;
             _statTotalClicks = 0;
 
 
@@ -176,6 +192,11 @@ namespace TMPro.Fitts
             }
 
             // increment trial count
+            _statTotalCount++;
+        }
+
+        public void PointerActive()
+        {
             _statTotalClicks++;
         }
     }

@@ -14,18 +14,19 @@ namespace TMPro.Fitts
 //        Vector3 _prevPosition;
 
         // var: elapsed time
-       float _elapsedTime;
+        float _elapsedTime;
 
-        int _statClicked = 0;
-        int _statTotalCount = 0;
-        float _statTotalTime = 0.0f;
+        int _statClicked;
+        int _statTotalCount;
+        int _statTotalClicks;
+        float _statTotalTime;
 //        float _statTotalDistance = 0.0f;
-        float _statAccuracy = 0.0f;
+        float _statAccuracy;
 
         // related UI
         //public Text _statUI;
         public TextMeshProUGUI _statUI;
-        public GameObject _startUI;
+        public GameObject[] _startUI;
 
         // Start is called before the first frame update
         void Start()
@@ -43,7 +44,7 @@ namespace TMPro.Fitts
             // update elapsed time
             _elapsedTime += Time.deltaTime;
             _statTotalTime += Time.deltaTime;
-            _statAccuracy = (100.0f * _statClicked) / _statTotalCount;
+            _statAccuracy = (100.0f * _statClicked) / _statTotalClicks;
             _statUI.text = "Time Elapsed: " + (_statTotalTime).ToString() + "\n" +
                     "Accuracy: " + (_statAccuracy).ToString() + "\n" +
                     "Spheres Clicked: " + (_statClicked).ToString() + "\n" +
@@ -52,6 +53,7 @@ namespace TMPro.Fitts
             if ((_elapsedTime > 1.0f) && (transform.localPosition != new Vector3(0f, 2.5f, 10f)))
             {
                 _statTotalCount++;
+                _statTotalClicks++;
                 transform.localPosition = new Vector3(0f, 2.5f, 10f);
             }
 
@@ -66,7 +68,10 @@ namespace TMPro.Fitts
                 //                   "avg time: " + (_statTotalTime / trials).ToString();
 
                 gameObject.SetActive(false);
-                _startUI.SetActive(true);
+                for (int i = 0; i < _startUI.Length; i++)
+                {
+                    _startUI[i].SetActive(true);
+                }
                 transform.localPosition = new Vector3(0f, 2.5f, 10f);
 
                 // need to stop the test
@@ -87,6 +92,7 @@ namespace TMPro.Fitts
 //            _statTotalDistance = 0f;
             _statTotalTime = 0f;
             _statTotalCount = 0;
+            _statTotalClicks = 0;
 
             Debug.Log("Test started.");
         }
@@ -126,7 +132,7 @@ namespace TMPro.Fitts
                 // move the target to new location
                 // i.e. range between (-8, 0, 10) to (8, 4, 10)
                 x = Random.Range(-10f, 10f);
-                y = Random.Range(0f, 5f);
+                y = Random.Range(0.5f, 5f);
 
                 _elapsedTime = 0f;
             }
@@ -139,6 +145,12 @@ namespace TMPro.Fitts
 
             // increment trial count
             _statTotalCount++;
+//            _statTotalClicks--;
+        }
+
+        public void PointerActive()
+        {
+            _statTotalClicks++;
         }
     }
 }
