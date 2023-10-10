@@ -98,8 +98,15 @@ namespace TMPro.Fitts
                     _startUI[i].SetActive(true);
                 }
 
+                if (_testBegun)
+                {
+                    string outstr = "GRIDSHOT\n" + _statUI.text + "\n";
+                    Debug.Log(outstr);
+                    DataLogger.Log(outstr);
+                    _testBegun = false;
+                }
+
                 // need to stop the test
-                _testBegun = false;
                 return;
             }
         }
@@ -130,8 +137,6 @@ namespace TMPro.Fitts
             _statTotalTime = 0f;
             _statTotalCount = 0;
             _statTotalClicks = 0;
-
-
 
             Debug.Log("Test started.");
         }

@@ -89,8 +89,7 @@ namespace TMPro.Fitts
             {
                 Debug.Log("Test completed.");
 
-                _statUI.text = "Time Elapsed: " + (_statTotalTime).ToString() + "\n" +
-                    "Accuracy: " + (_statAccuracy).ToString() + "\n" +
+                _statUI.text = "Accuracy: " + (_statAccuracy).ToString() + "\n" +
                     "Targets Tracked: " + (_statTotalCount).ToString();
                 //                    "avg distance: " + (_statTotalDistance / trials).ToString() + "\n" +
                 //                   "avg time: " + (_statTotalTime / trials).ToString();
@@ -101,6 +100,10 @@ namespace TMPro.Fitts
                     _startUI[i].SetActive(true);
                 }
                 transform.localPosition = new Vector3(0f, 2.5f, 10f);
+
+                string outstr = "STRAFETRACK\n" + _statUI.text + "\n";
+                Debug.Log(outstr);
+                DataLogger.Log(outstr);
 
                 // need to stop the test
                 return;

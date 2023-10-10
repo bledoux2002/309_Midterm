@@ -74,6 +74,13 @@ namespace TMPro.Fitts
                 }
                 transform.localPosition = new Vector3(0f, 2.5f, 10f);
 
+                // store distance and task time to the file
+                // goes to C:\Users\<user>\AppData\LocalLow\<company name> (our company name is DefaultCompany)
+                
+                string outstr = "SPIDERSHOT\n" + _statUI.text + "\n";
+                Debug.Log(outstr);
+                DataLogger.Log(outstr);
+                    
                 // need to stop the test
                 return;
             }
