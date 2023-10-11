@@ -10,7 +10,7 @@ namespace TMPro.Fitts
     public class Strafe : MonoBehaviour
     {
         // audio clip 
-        //public AudioClip _aClip;
+        public AudioClip _aClip;
 
         // var: elapsed time
         float _elapsedTime;
@@ -71,6 +71,7 @@ namespace TMPro.Fitts
                 if (_health <= 0f)
                 {
                     Debug.Log("Target Destroyed");
+                    AudioSource.PlayClipAtPoint(_aClip, transform.position);
                     _health = 100.0f;
                     transform.position = new Vector3(Random.Range(-10.0f, 10.0f), 2.5f, 10.0f);
                     // increment trial count

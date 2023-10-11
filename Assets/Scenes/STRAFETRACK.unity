@@ -2306,6 +2306,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _countdownUI: {fileID: 1058944632}
+  _startUI: []
 --- !u!114 &1058944632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3301,6 +3302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1047b355ff51464a8026bceb720591a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aClip: {fileID: 8300000, guid: 6ce1c086841e8d344895eb7121bb1cb0, type: 3}
   _statUI: {fileID: 1595392663}
   _startUI:
   - {fileID: 1614052390}
