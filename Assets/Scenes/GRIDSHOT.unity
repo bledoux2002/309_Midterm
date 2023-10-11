@@ -3114,6 +3114,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _countdownUI: {fileID: 1981843847}
+  _startUI:
+  - {fileID: 1614052390}
+  - {fileID: 1337416780}
+  - {fileID: 1022504708}
+  - {fileID: 1776833772}
 --- !u!114 &1981843847
 MonoBehaviour:
   m_ObjectHideFlags: 0
