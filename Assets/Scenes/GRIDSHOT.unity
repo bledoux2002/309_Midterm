@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetPrefab: {fileID: 4898152618411696736, guid: 72085b8486721c54892520455ec44fc0, type: 3}
-  _aClip: {fileID: 8300000, guid: adbb98812e844c34b94111d961ddf71b, type: 3}
+  _aClip: {fileID: 8300000, guid: 6ce1c086841e8d344895eb7121bb1cb0, type: 3}
   _statUI: {fileID: 1595392663}
   _startUI:
   - {fileID: 1614052390}
