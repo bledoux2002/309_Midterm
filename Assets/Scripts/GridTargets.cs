@@ -86,6 +86,8 @@ namespace TMPro.Fitts
 
                 _grid[_activeX, _activeY].SetActive(false);
 
+                _activeTargets = 0;
+
                 _statUI.text = "Accuracy: " + (_statAccuracy).ToString() + "\n" +
                     "Spheres Clicked: " + (_statClicked).ToString() + "\n" +
                     "Total Spheres: " + (_statTotalCount).ToString();
@@ -113,6 +115,11 @@ namespace TMPro.Fitts
 
         public void StartTest()
         {
+            for (int i = 0; i < _startUI.Length; i++)
+            {
+                _startUI[i].SetActive(false);
+            }
+
             _testBegun = true;
             // randomly activate 3 spheres
             

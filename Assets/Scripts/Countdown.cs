@@ -11,6 +11,7 @@ namespace TMPro.Fitts
         public float _startTime;
         public UnityEvent function;
         public TextMeshProUGUI _countdownUI;
+        public GameObject[] _startUI;
 
         // Start is called before the first frame update
         void Start()
@@ -37,6 +38,10 @@ namespace TMPro.Fitts
         {
             gameObject.SetActive(true);
             _startTime = 3f;
+            for (int i = 0; i < _startUI.Length; i++)
+            {
+                _startUI[i].SetActive(false);
+            }
         }
     }
 }
